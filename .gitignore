@@ -1,0 +1,10 @@
+__pycache__/
+lateximgs/
+*.cls
+*.aux
+*.bbl
+*.log
+*.out
+*.gz
+*.tex
+*.npy
