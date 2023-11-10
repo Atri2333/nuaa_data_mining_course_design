@@ -1,0 +1,21 @@
+python main.py --model_type=resnest50 --pretrained --batch_size=32 --lr=1e-4
+python main.py --model_type=resnest50 --pretrained --mixup --batch_size=32 --lr=1e-4
+python main.py --model_type=resnest50 --pretrained --cutmix --batch_size=32 --lr=1e-4
+python main.py --model_type=resnext50 --pretrained --batch_size=64 --lr=1e-3 --num_epoch=50
+python main.py --model_type=resnext50 --pretrained --mixup --batch_size=64 --lr=1e-3 --num_epoch=50
+python main.py --model_type=resnext50 --pretrained --cutmix --batch_size=64 --lr=1e-3 --num_epoch=50
+python main.py --model_type=densenet161 --pretrained --batch_size=32 --lr=1e-4
+python main.py --model_type=densenet161 --pretrained --mixup --batch_size=32 --lr=1e-4
+python main.py --model_type=densenet161 --pretrained --cutmix --batch_size=32 --lr=1e-4
+python main.py --model_type=resnet34 --pretrained --batch_size=32 --lr=1e-4
+python main.py --model_type=resnet34 --pretrained --mixup --batch_size=32 --lr=1e-4
+python main.py --model_type=resnet34 --pretrained --cutmix --batch_size=32 --lr=1e-4
+tensorboard --logdir result_dl
+
+
+1、特征提取：HOG、SIFT、SURF、Kmeans、Bag of Feature
+2、分类器：KNN、SVM、随机森林、朴素贝叶斯
+3、数据增强：随机翻转、旋转、归一化
+4、CNN：resnet、resnest、resnext、densenet
+5、trick：cutmix、mixup
+6、kfold、ensemble
