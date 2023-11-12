@@ -12,7 +12,7 @@ from utils import *
 def knn4hog():
     X, y = feature_extraction.HOGDataSet(".", "train.csv")
     print(X[:10], y[:10])
-    k_range = range(1, 10)
+    k_range = range(1, 20)
     k_scores, k_max = [], []
 
     KF = KFold(n_splits=5)
@@ -100,10 +100,10 @@ def knn4sift(using_local_data=True):
 
     plt.plot(k_range, k_max)
     plt.xlabel('Value of K for KNN')
-    plt.ylabel('fuck')
+    plt.ylabel('acc')
     plt.show()
 
 
 
 if __name__ == "__main__":
-    knn4sift(False)
+    knn4hog()

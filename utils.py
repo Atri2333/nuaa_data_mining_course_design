@@ -42,7 +42,7 @@ def calcFeatVec(features, centers):
         sortedIndices = dist.argsort()
         idx = sortedIndices[0]
         featVec[idx] += 1
-    return normalization(featVec)
+    return featVec
 
 
 # def pca_data(X, dim):
