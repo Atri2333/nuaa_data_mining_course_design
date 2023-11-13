@@ -81,9 +81,6 @@ if __name__ == "__main__":
         model.svm.svm4hog()
         exit()
 
-
-
-
     models = []
     if args.mode == "train":
         if args.model_type == "resnet34":

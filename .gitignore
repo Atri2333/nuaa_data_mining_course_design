@@ -6,4 +6,6 @@ __pycache__/
 *.out
 *.gz
 *.npy
+*.ipynb
 result_dl_*/
+submitmodels/
