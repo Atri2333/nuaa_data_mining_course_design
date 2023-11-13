@@ -8,13 +8,14 @@ import albumentations
 from albumentations.pytorch.transforms import ToTensorV2
 
 import train_deep
-from dl_model import *
+from model.dl_model import *
 from data import *
-from utils import *
-import knn, dummy
+from model.utils import *
+import model.knn, model.dummy, model.svm
 
 num_classes = 176
 save_path = "submission.csv"
+csv_path = "train.csv"
 
 def predict(model, test_iter, device):
     model = model.to(device)
@@ -59,10 +60,30 @@ if __name__ == "__main__":
     parser.add_argument("--pretrained", action="store_true", help="Models were pretrained")
     parser.add_argument("--mixup", action="store_true", help="using mixup trick")
     parser.add_argument("--cutmix", action="store_true", help="using cutmix trick")
-    parser.add_argument("--kfold", action="store_true", help="using 5-fold cross validation")
     parser.add_argument("--mode", default="train", type=str, help="train or predict")
 
     args = parser.parse_args()
+
+    if args.model_type == "dummy":
+        X, y = model.dummy.getDataSet(".", csv_path)
+        model.dummy.Classify(X, y)
+        exit()
+    elif args.model_type == "knn4hog":
+        model.knn.knn4hog()
+        exit()
+    elif args.model_type == "knn4sift":
+        model.knn.knn4sift()
+        exit()
+    elif args.model_type == "svm4sift":
+        model.svm.svm4sift()
+        exit()
+    elif args.model_type == "svm4hog":
+        model.svm.svm4hog()
+        exit()
+
+
+
+
     models = []
     if args.mode == "train":
         if args.model_type == "resnet34":
@@ -116,4 +137,4 @@ if __name__ == "__main__":
             if isinstance(model, nn.Module):
                 train_deep.train(model, args.num_epoch, train_iter, valid_iter, args.lr, args.wd, criterion, get_device(), ".", mixup=args.mixup, cutmix=args.cutmix, type=args.model_type)
     else:
-        pass
+        pass 

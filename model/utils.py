@@ -44,6 +44,22 @@ def calcFeatVec(features, centers):
         featVec[idx] += 1
     return featVec
 
+def rand_bbox(size, lam):
+    '''cut random bbox'''
+    W, H = size[2], size[3]
+    cut_rat = np.sqrt(1. - lam)
+    cut_w = np.int32(W * cut_rat)
+    cut_h = np.int32(H * cut_rat)
+
+    cx = np.random.randint(W)
+    cy = np.random.randint(H)
+
+    bbx1 = np.clip(cx - cut_w // 2, 0, W)
+    bby1 = np.clip(cy - cut_h // 2, 0, H)
+    bbx2 = np.clip(cx + cut_w // 2, 0, W)
+    bby2 = np.clip(cy + cut_h // 2, 0, H)
+
+    return bbx1, bby1, bbx2, bby2
 
 # def pca_data(X, dim):
 #     '''garbage function, i am shabi!!!'''

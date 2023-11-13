@@ -1,6 +1,6 @@
 import torch
 import torchvision
-from utils import *
+from model.utils import *
 import torch.nn as nn
 from resnest.torch import resnest50
 

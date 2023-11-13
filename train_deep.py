@@ -8,7 +8,7 @@ from tqdm import tqdm
 import os
 import numpy as np
 
-from utils import *
+from model.utils import *
 
 
 def train(model, num_epoch, train_iter, valid_iter, learning_rate, weight_decay, criterion, device, save_path, mixup=False, cutmix=False, count=0, type=None):

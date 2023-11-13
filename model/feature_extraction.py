@@ -8,7 +8,8 @@ import cv2
 import os
 import pandas as pd
 import numpy as np
-from utils import *
+from tqdm import tqdm
+from model.utils import *
 
 csv_path = "train.csv"
 labels_dataframe = pd.read_csv(csv_path)
@@ -32,7 +33,7 @@ def HOGDataSet(file_path, csv_path):
     data_len = len(data_info.index) - 1
     print(f"data_len:{data_len}")
     X, y = [], []
-    for i in range(data_len):
+    for i in tqdm(range(data_len), desc="loading dataset"):
         image_name = data_info.iloc[i+1, 0]
         img = cv2.imread(os.path.join(file_path, image_name))
         x = getHOG(img)
@@ -41,7 +42,7 @@ def HOGDataSet(file_path, csv_path):
         X.append(x)
         y.append(label)
         if i % 1000 == 0:
-            print(i, x, label)    
+            pass   
     return X, y
 
 def getSIFT(img):
@@ -57,7 +58,7 @@ def SIFTDataSet(file_path, csv_path):
     data_len = len(data_info.index) - 1
     print(f"data_len:{data_len}")
     X, y = [], []
-    for i in range(data_len):
+    for i in tqdm(range(data_len), desc="loading dataset"):
         image_name = data_info.iloc[i+1, 0]
         img = cv2.imread(os.path.join(file_path, image_name))
         x = getSIFT(img)
@@ -66,7 +67,7 @@ def SIFTDataSet(file_path, csv_path):
         X.append(x)
         y.append(label)
         if i % 1000 == 0:
-            print(i, label)    
+            pass   
     return X, y
 
 # def getORB(img):

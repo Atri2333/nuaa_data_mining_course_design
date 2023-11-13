@@ -5,7 +5,6 @@ from torch.utils.data import Dataset
 import os
 import numpy as np
 from PIL import Image
-import sklearn
 from sklearn import preprocessing
 import cv2
 

@@ -4,16 +4,17 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score
 import numpy as np
+from tqdm import tqdm
 
 from sklearn.datasets import load_iris
-import feature_extraction
-from utils import *
+import model.feature_extraction as feature_extraction
+from model.utils import *
 
 def knn4hog():
     X, y = feature_extraction.HOGDataSet(".", "train.csv")
-    print(X[:10], y[:10])
+    # print(X[:10], y[:10])
     k_range = range(1, 20)
-    k_scores, k_max = [], []
+    k_scores = []
 
     KF = KFold(n_splits=5)
 
@@ -35,18 +36,17 @@ def knn4hog():
             k_score.append(score)
 
 
-        k_scores.append(k_score)
-        k_max.append(max(k_score))
-        print(f"k={k}, k_score:{max(k_score)}")
+        k_scores.append(sum(k_score)/5)
+        print(f"k={k}, k_score:{sum(k_score)/5:.03f}")
 
-    plt.plot(k_range, k_max)
+    plt.plot(k_range, k_scores)
     plt.xlabel('Value of K for KNN')
-    plt.ylabel('fuck')
+    plt.ylabel('acc')
     plt.show()
 
 def knn4sift(using_local_data=True):
     X, y = feature_extraction.SIFTDataSet(".", "train.csv")
-    print(X[:2], y[:10])
+    # print(X[:2], y[:10])
     k_range = range(1, 20)
     k_scores, k_max = [], []
 
@@ -60,7 +60,7 @@ def knn4sift(using_local_data=True):
         y_test_sub = np.array(y)[test_index]
         if using_local_data == False:
             features = np.float32([]).reshape(0, 128)
-            for i in train_index:
+            for i in tqdm(train_index, desc=f"building wordbag{index}"):
                 if X[i] is not None:
                     features = np.append(features, np.array(X[i]), axis=0)
                 if i % 1000 == 0:
@@ -85,7 +85,7 @@ def knn4sift(using_local_data=True):
         index += 1
 
 
-    for k in k_range:
+    for k in tqdm(k_range):
         k_score = []
         for i in range(5):
             knn = KNeighborsClassifier(n_neighbors=k, weights="uniform", algorithm="kd_tree")
@@ -94,11 +94,10 @@ def knn4sift(using_local_data=True):
             score = accuracy_score(y_pred, y_test[i])
             k_score.append(score)
 
-        k_scores.append(k_score)
-        k_max.append(max(k_score))
-        print(f"k={k}, k_score:{max(k_score)}")
+        k_scores.append(sum(k_score) / 5)
+        print(f"k={k}, k_score:{sum(k_score) / 5:.03f}")
 
-    plt.plot(k_range, k_max)
+    plt.plot(k_range, k_scores)
     plt.xlabel('Value of K for KNN')
     plt.ylabel('acc')
     plt.show()
