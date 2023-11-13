@@ -9,3 +9,5 @@ __pycache__/
 *.ipynb
 result_dl_*/
 submitmodels/
+*.blg
+*.xml

@@ -1,6 +1,6 @@
 %!TEX program = xelatex
 % 完整编译: xelatex -> bibtex -> xelatex -> xelatex
-\documentclass[lang=cn,12pt,a4paper,cite=authoryear]{elegantpaper}
+\documentclass[lang=cn,12pt,a4paper]{elegantpaper}
 
 \title{数据挖掘课程设计报告}
 \author{姓名:姚远\and 学号: 162150109}
@@ -34,7 +34,7 @@
 
 \begin{document}
 \maketitle
-
+项目网址: \href{https://github.com/Atri2333/nuaa_data_mining_course_design}{\color{black}https://github.com/Atri2333/nuaa\_data\_mining\_course\_design}
 \section{任务概况}
 \subsection{数据集}
 本课设数据集来自于 \href{https://www.kaggle.com/competitions/classify-leaves}{Kaggle}, 为树叶分类数据集. 该数据集包含176类不同的树叶, 18353张训练样本(每种树叶至少50个样本, 长尾效应并不明显)以及8800张测试样本. 分辨率皆为 $224 \times 224$. 可以发现这是一个简单的图片分类任务.
@@ -226,7 +226,7 @@ KMeans常用的一种方法是按批修改法, 它的修改原则是使如下的
 
 另外由于树叶的特性, 我们可以进行随机翻转、随机旋转等操作. 注意这些操作是在训练的时候对训练集进行的, 这样的话每个epoch的训练集由于数据增强的不确定性会造成不同, 这能够进一步提高模型的泛化能力.
 \subsection{模型与参数}
-本课设采用了resnet34及其三个变种: resnext50, resnest50和densenet161, 均为预训练模型.
+本课设采用了resnet34及其三个变种: resnext50\cite{xie2017aggregated}, resnest50\cite{zhang2020resnest} 和densenet161\cite{huang2018densely}, 均为预训练模型.
 超参数设置如下:
 \begin{table}[ht]
     \centering
@@ -246,7 +246,7 @@ KMeans常用的一种方法是按批修改法, 它的修改原则是使如下的
 \subsection{Trick}
 事实上这部分也可以被认为是数据预处理的范畴, 因为它们是根据跨图片增强的概念提出来的idea, 然而可以通过修改损失函数来实现同样的效果.
 \subsubsection{MixUp}
-MixUp是一种双图片增强, 在原论文提出的核心公式为:
+MixUp\cite{zhang2018mixup} 是一种双图片增强, 在原论文提出的核心公式为:
 \begin{equation*}
 \begin{aligned}
     \tilde{\bm{x}} &= \lambda \bm{x}_i + (1 - \lambda)\bm{x}_j\\
@@ -262,7 +262,7 @@ MixUp是一种双图片增强, 在原论文提出的核心公式为:
 需要注意这里的MixUp同样是在训练的时候进行的, 而不是提前预处理好训练数据.
 
 \subsubsection{CutMix}
-CutMix是一种多图片增强, 相比于MixUp在灰度值上的按权叠加, CutMix更为暴力, 它直接在原图片上进行裁剪, 然后将新图片对应的区域直接贴进去.
+CutMix\cite{yun2019cutmix}是一种多图片增强, 相比于MixUp在灰度值上的按权叠加, CutMix更为暴力, 它直接在原图片上进行裁剪, 然后将新图片对应的区域直接贴进去.
 
 而对于标签的修改同MixUp. 因此损失函数同样可以写为:
 \begin{equation*}
@@ -296,7 +296,10 @@ CutMix是一种多图片增强, 相比于MixUp在灰度值上的按权叠加, Cu
 \end{figure}
 
 \newpage
-根据实验结果, 我们发现MixUp trick对于模型精度其实并没有提升, 相反CutMix trick对于模型精度有大约接近0.1的提升. 这可能与树叶的特性有关, 叠加树叶的灰度信息或许并不利于特征提取, 而直接叠加二者的纹理信息可能有助于网络进一步提取特征.
+根据实验结果, 我们发现MixUp trick对于模型精度其实并没有提升, 相反CutMix trick对于模型精度有大约接近0.01的提升. 这可能与树叶的特性有关, 叠加树叶的灰度信息或许并不利于特征提取, 而直接叠加二者的纹理信息可能有助于网络进一步提取更高阶的特征.
 
 在所有的模型中, resnest50的综合表现最佳, resnext50由于独特的网络设计(以及我故意设的高学习率)导致它的acc曲线较陡, 而即使是最原始的resnet34, 它在验证集上的精度也远高于前面的KNN和SVM分类器在人工提取特征上的效果. 
+
+% \bibliographystyle{plain}
+\bibliography{ref}
 \end{document}
