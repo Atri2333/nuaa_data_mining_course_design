@@ -38,6 +38,10 @@ class MyLeaveDataset(Dataset):
             self.img_arr = np.asarray(self.data_info.iloc[self.train_len + 1: , 0])
             self.label_arr = np.asarray(self.data_info.iloc[self.train_len + 1: , 1])
         elif mode == "test":
+            self.data_info = pd.read_csv(os.path.join(file_path, csv_path), header=None)
+            self.mode = mode
+            self.data_len = len(self.data_info.index) - 1
+            self.trans = trans
             self.img_arr = np.asarray(self.data_info.iloc[1: , 0])
         else:
             pass

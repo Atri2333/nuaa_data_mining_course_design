@@ -298,7 +298,19 @@ CutMix\cite{yun2019cutmix}是一种多图片增强, 相比于MixUp在灰度值�
 \newpage
 根据实验结果, 我们发现MixUp trick对于模型精度其实并没有提升, 相反CutMix trick对于模型精度有大约接近0.01的提升. 这可能与树叶的特性有关, 叠加树叶的灰度信息或许并不利于特征提取, 而直接叠加二者的纹理信息可能有助于网络进一步提取更高阶的特征.
 
-在所有的模型中, resnest50的综合表现最佳, resnext50由于独特的网络设计(以及我故意设的高学习率)导致它的acc曲线较陡, 而即使是最原始的resnet34, 它在验证集上的精度也远高于前面的KNN和SVM分类器在人工提取特征上的效果. 
+在所有的模型中, resnest50的综合表现最佳, resnext50由于独特的网络设计(以及我故意设的高学习率)导致它的acc曲线较陡, 而即使是最原始的resnet34, 它在验证集上的精度也远高于前面的KNN和SVM分类器在人工提取特征上的效果. 说明传统机器学习模型在这种超过一百余类的分类任务中还是不尽人意的
+
+\subsection{集成+推理}
+我们采用resnest50、resnext50和densenet161在使用CutMix Trick下的训练好的模型为我们最终的提交模型. 这里我们采用投票的方式进行集成, 以验证正确率最高的resnest50为优先级最高的模型, 其余二者其次.
+
+ensemble后在kaggle上的评测成绩如下:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{lateximgs/6.png}
+    
+\end{figure}
+
+达到了0.972的acc, 在并没有仔细调参, 叠buff (trick)的情况下还是可以接受的.
 
 % \bibliographystyle{plain}
 \bibliography{ref}

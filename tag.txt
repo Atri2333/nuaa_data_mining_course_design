@@ -10,11 +10,11 @@ python main.py --model_type=densenet161 --pretrained --cutmix --batch_size=32 --
 python main.py --model_type=resnet34 --pretrained --batch_size=32 --lr=1e-4
 python main.py --model_type=resnet34 --pretrained --mixup --batch_size=32 --lr=1e-4
 python main.py --model_type=resnet34 --pretrained --cutmix --batch_size=32 --lr=1e-4
-tensorboard --logdir result_dl
+tensorboard --logdir result_dl_{}_{}_{}
 
 
-1、特征提取：HOG、SIFT、SURF、Kmeans、Bag of Feature
-2、分类器：KNN、SVM、随机森林、朴素贝叶斯
+1、特征提取：HOG、SIFT、#SURF#、Kmeans、Bag of Feature
+2、分类器：KNN、SVM、#随机森林、朴素贝叶斯#
 3、数据增强：随机翻转、旋转、归一化
 4、CNN：resnet、resnest、resnext、densenet
 5、trick：cutmix、mixup

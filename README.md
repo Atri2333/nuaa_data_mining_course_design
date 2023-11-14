@@ -40,10 +40,16 @@ python main.py --model_type=$model_name --pretrained --mixup #using mixup
 
 model_name can be: resnet34、resnext50、resnest50、densenet161
 
+For test:
+```
+python main.py --mode=test
+```
+to generate `submission.csv`.
+
 For detail, see `main.py`.
 
 ## 三种方法
 
-老师要求要用三种不同的方法来解决问题，我觉得k折交叉验证+特征提取+聚类/降维+传统/深度学习分类器应该够了吧。。。
+老师要求要用三种不同的方法来解决问题，我觉得k折交叉验证+特征提取+聚类/降维+传统/深度学习分类器+ensemble应该够了吧。。。
 
-另外，希望这是我最后一次做ai相关的项目。哥们还是更喜欢做sys
+另外，希望这是我最后一次做ai相关的项目，感觉做的纯一拖。哥们还是更喜欢做sys。

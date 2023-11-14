@@ -8,6 +8,6 @@ __pycache__/
 *.npy
 *.ipynb
 result_dl_*/
-submitmodels/
+# submitmodels/
 *.blg
 *.xml
