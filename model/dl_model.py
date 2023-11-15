@@ -1,4 +1,3 @@
-import torch
 import torchvision
 from model.utils import *
 import torch.nn as nn

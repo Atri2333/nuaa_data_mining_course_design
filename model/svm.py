@@ -6,7 +6,6 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 from tqdm import tqdm
 
-from sklearn.datasets import load_iris
 import model.feature_extraction as feature_extraction
 from model.utils import *
 

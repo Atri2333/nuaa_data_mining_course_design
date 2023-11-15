@@ -40,7 +40,7 @@ python main.py --model_type=$model_name --pretrained --mixup #using mixup
 
 model_name can be: resnet34、resnext50、resnest50、densenet161
 
-For test:
+For test (你需要把训练好的模型放到 `./submitmodels`, 具体见 `main.py`):
 ```
 python main.py --mode=test
 ```

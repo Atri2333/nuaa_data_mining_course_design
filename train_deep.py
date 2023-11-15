@@ -10,7 +10,6 @@ import numpy as np
 
 from model.utils import *
 
-
 def train(model, num_epoch, train_iter, valid_iter, learning_rate, weight_decay, criterion, device, save_path, mixup=False, cutmix=False, count=0, type=None):
     assert(mixup == False or cutmix == False)
 

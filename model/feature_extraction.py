@@ -1,13 +1,9 @@
 # used for traditional ml
-from skimage.io import imshow
 from skimage.transform import resize
 from skimage.feature import hog
-from skimage import exposure
-import matplotlib.pyplot as plt
 import cv2
 import os
 import pandas as pd
-import numpy as np
 from tqdm import tqdm
 from model.utils import *
 

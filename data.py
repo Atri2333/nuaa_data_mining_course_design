@@ -5,7 +5,6 @@ from torch.utils.data import Dataset
 import os
 import numpy as np
 from PIL import Image
-from sklearn import preprocessing
 import cv2
 
 labels_dataframe = pd.read_csv("train.csv")
@@ -14,7 +13,6 @@ n_classes = len(leave_labels)
 
 class_to_num = dict(zip(leave_labels, range(n_classes)))
 num_to_class = {k: v for v, k in class_to_num.items()}
-
 
 
 class MyLeaveDataset(Dataset):

@@ -1,5 +1,5 @@
 import torch
-from sklearn.decomposition import PCA
+# from sklearn.decomposition import PCA
 import numpy as np
 import cv2
 
