@@ -1,4 +1,7 @@
 # nuaa_data_mining_course_design
+
+# 坏了，老子忘记设private了，怎么有人star了这个。不会有人抄吧？
+
 NUAA数据挖掘课设
 
 树叶分类：https://www.kaggle.com/competitions/classify-leaves
